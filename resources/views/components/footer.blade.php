@@ -8,8 +8,9 @@
             <div>
                 <h3 class="font-bold text-lg mb-4">Liens rapides</h3>
                 <ul class="space-y-2 text-gray-400">
-                    <li><a href="/borrowing" class="hover:text-white">Mes emprunts</a></li>
-                    <li><a href="/profil" class="hover:text-white">Mon compte</a></li>
+                    <li><a href="{{ route('borrowing.list') }}" class="hover:text-white">Mes emprunts</a></li>
+                    <li><a href="{{ route('user.profil') }}" class="hover:text-white">Mon compte</a></li>
+                    <li><a href="{{ route('search.index') }}" class="hover:text-white">Catalogue</a></li>
                 </ul>
             </div>
             <div>

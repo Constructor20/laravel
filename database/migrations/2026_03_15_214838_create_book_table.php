@@ -53,7 +53,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("id_book");
             $table->foreignId("id_statut");
-            $table->foreignId("comissioning");
+            $table->date("comissioning")->nullable();
             $table->timestamps();
 
 

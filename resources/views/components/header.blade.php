@@ -7,25 +7,32 @@
                 </a>
             </div>
             
-            <div class="flex-1 max-w-lg mx-8">
+            <form action="/search" method="GET" class="flex-1 max-w-lg mx-8">
                 <div class="relative">
-                    <input type="text" placeholder="Rechercher un livre..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500">
+                    <input type="text" name="params" placeholder="Rechercher un livre..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-            </div>
+            </form>
 
             <div class="flex items-center space-x-6">
-                <a href="/borrowing" class="text-gray-600 hover:text-indigo-600">
+                <a href="{{ route('borrowing.list') }}" class="text-gray-600 hover:text-indigo-600">
                     <i class="fas fa-shopping-bag mr-1"></i>Mes emprunts
                 </a>
-                <a href="/profil" class="text-gray-600 hover:text-indigo-600">
+                <a href="{{ route('user.profil') }}" class="text-gray-600 hover:text-indigo-600">
                     <i class="fas fa-user mr-1"></i>Mon compte
                 </a>
-                <a href="/connect" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
-                    Connexion
-                </a>
+                @auth
+                    <span class="text-gray-600">{{ auth()->user()->name }}</span>
+                    <a href="/logout" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                        Déconnexion
+                    </a>
+                @else
+                    <a href="{{ route('user.connect') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+                        Connexion
+                    </a>
+                @endauth
             </div>
         </div>
     </div>
