@@ -34,7 +34,8 @@ class BorrowController extends Controller
         
         Loan::create([
             'id_user' => $user->id,
-            'id_borrow' => $borrow->id
+            'id_borrow' => $borrow->id,
+            'id_exemplar' => $exemplar->id
         ]);
         
         $exemplar->update(['id_statut' => 2]);
@@ -42,13 +43,25 @@ class BorrowController extends Controller
         return redirect()->route('borrowing.list');
     }
 
-    public function return($loanId) {
-        $loan = Loan::findOrFail($loanId);
-        $borrow = Borrow::findOrFail($loan->id_borrow);
-        
-        $loan->delete();
-        $borrow->delete();
-        
-        return redirect()->route('borrowing.list');
+    public function return($id) {
+        try {
+            $loan = Loan::findOrFail($id);
+            $exemplarId = $loan->id_exemplar;
+            
+            // Remettre l'exemplaire en disponible
+            if ($exemplarId) {
+                $exemplar = Exemplar::find($exemplarId);
+                if ($exemplar) {
+                    $exemplar->update(['id_statut' => 1]);
+                }
+            }
+            
+            // Supprimer le prêt
+            $loan->delete();
+            
+            return redirect()->route('borrowing.list');
+        } catch (\Exception $e) {
+            return redirect()->route('borrowing.list')->with('error', 'Erreur: ' . $e->getMessage());
+        }
     }
 }

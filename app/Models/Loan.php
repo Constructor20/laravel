@@ -9,7 +9,7 @@ class Loan extends Model
 {
     protected $table = 'loans';
     
-    protected $fillable = ['id_user', 'id_borrow'];
+    protected $fillable = ['id_user', 'id_borrow', 'id_exemplar'];
 
     public function user(): BelongsTo
     {

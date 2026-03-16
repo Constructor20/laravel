@@ -18,11 +18,11 @@ return new class extends Migration
         });
 
         Schema::create('loans', function (Blueprint $table) {
+            $table->id();
             $table->foreignId("id_user")->constrained("users")->cascadeOnDelete();
             $table->foreignId("id_borrow")->constrained("borrow")->cascadeOnDelete();
+            $table->foreignId("id_exemplar")->nullable()->constrained("exemplar")->cascadeOnDelete();
             $table->timestamps();
-
-            $table->primary(["id_user", "id_borrow"]);
         });
     }
 
