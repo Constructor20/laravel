@@ -8,8 +8,12 @@ use App\Http\Controllers\BorrowController;
 
 //Base root
 // Route::get('/', function () {
-//     return view('welcome');
+//     return view('index');
 // });
+
+Route::get('/', function () {
+    return view('index');
+});
 
 // USER
 Route::get('/subscription', [UserController::class, 'subscription']);
